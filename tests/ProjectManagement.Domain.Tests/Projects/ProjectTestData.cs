@@ -8,8 +8,7 @@ static class ProjectTestData
     public static Project CreateProject(
         string title = "Project",
         string? description = "Description",
-        ProjectPriority priority = ProjectPriority.Medium
-    )
+        ProjectPriority priority = ProjectPriority.Medium)
     {
         return new Project(title, description, priority);
     }

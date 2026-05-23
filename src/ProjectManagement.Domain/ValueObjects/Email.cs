@@ -7,8 +7,11 @@ public sealed record Email
 {
     public const int MaxLenght = 50;
 
-    public static readonly Regex Regex = new(
-        @"^(?!.*(\.\.|__|\+\+|--))[a-z0-9][a-z0-9._+-]+[a-z0-9]@[a-z][a-z0-9.-]+[a-z0-9]\.[a-z]{2,}$",
+    public const string Pattern =
+        @"^(?!.*(\.\.|__|\+\+|--))[a-z0-9][a-z0-9._+-]+[a-z0-9]@[a-z][a-z0-9.-]+[a-z0-9]\.[a-z]{2,}$";
+
+    private static readonly Regex Regex = new(
+        Pattern,
         RegexOptions.Compiled
     );
 
@@ -21,13 +24,13 @@ public sealed record Email
         if (string.IsNullOrWhiteSpace(value))
             throw new EmailException("Email is empty.");
 
+        if (value.Length > MaxLenght)
+            throw new EmailException("Email is too long.");
+
         value = value.Trim().ToLower();
 
         if (!Regex.IsMatch(value))
             throw new EmailException("Invalid email.");
-
-        if (value.Length > MaxLenght)
-            throw new EmailException("Email is too long.");
 
         return new Email(value);
     }

@@ -20,7 +20,7 @@ public class WorkTaskTests
     {
         Assert.Throws<ArgumentNullException>(() =>
             WorkTask.Create(
-                Guid.NewGuid(),
+                Guid.CreateVersion7(),
                 "",
                 "desc",
                 DateTime.UtcNow.AddDays(1))
@@ -32,7 +32,7 @@ public class WorkTaskTests
     {
         Assert.Throws<ArgumentNullException>(() =>
             WorkTask.Create(
-                Guid.NewGuid(),
+                Guid.CreateVersion7(),
                 "   ",
                 "desc",
                 DateTime.UtcNow.AddDays(1))
@@ -46,7 +46,7 @@ public class WorkTaskTests
 
         Assert.Throws<ArgumentOutOfRangeException>(() =>
             WorkTask.Create(
-                Guid.NewGuid(),
+                Guid.CreateVersion7(),
                 title,
                 "desc",
                 DateTime.UtcNow.AddDays(1))
@@ -78,7 +78,7 @@ public class WorkTaskTests
     {
         var task = CreateTask();
 
-        var id = Guid.NewGuid();
+        var id = Guid.CreateVersion7();
 
         task.AssignExecutor(id);
         task.AssignExecutor(id);
@@ -99,7 +99,7 @@ public class WorkTaskTests
     {
         var task = CreateTask();
 
-        var id = Guid.NewGuid();
+        var id = Guid.CreateVersion7();
 
         task.AssignExecutor(id);
 
@@ -146,7 +146,7 @@ public class WorkTaskTests
     private static WorkTask CreateTask()
     {
         return WorkTask.Create(
-            Guid.NewGuid(),
+            Guid.CreateVersion7(),
             "task",
             "desc",
             DateTime.UtcNow.AddDays(1)
@@ -156,7 +156,7 @@ public class WorkTaskTests
     private static WorkTask CreateCompletedTask()
     {
         var t = CreateTask();
-        t.AssignExecutor(Guid.NewGuid());
+        t.AssignExecutor(Guid.CreateVersion7());
         t.Complete();
         return t;
     }

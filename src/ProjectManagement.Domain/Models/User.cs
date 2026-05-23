@@ -24,7 +24,7 @@ public class User : IAuditable
     private User() { }
 
 
-    public Guid Id { get; private set; } = Guid.NewGuid();
+    public Guid Id { get; private init; } = Guid.CreateVersion7();
 
     public string Name
     {

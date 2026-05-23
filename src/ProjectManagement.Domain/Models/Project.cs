@@ -23,10 +23,12 @@ public class Project : IAuditable
         Priority = priority;
     }
 
-    private Project() { }
+    private Project()
+    {
+    }
 
 
-    public Guid Id { get; private set; } = Guid.NewGuid();
+    public Guid Id { get; private init; } = Guid.CreateVersion7();
 
     public Guid? ManagerId { get; private set; }
 
@@ -194,7 +196,7 @@ public class Project : IAuditable
     private WorkTask GetWorkTask(Guid workTaskId)
     {
         return _workTasks.FirstOrDefault(x => x.Id == workTaskId)
-            ?? throw new DomainRuleException("This task is not in the project.");
+               ?? throw new DomainRuleException("This task is not in the project.");
     }
 
     private void EnsureEditable()

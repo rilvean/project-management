@@ -2,8 +2,8 @@ namespace ProjectManagement.Domain.Models;
 
 public class ProjectExecutor
 {
-    public Guid ProjectId { get; private set; }
-    public Guid UserId { get; private set; }
+    public Guid ProjectId { get; private init; }
+    public Guid UserId { get; private init; }
 
 
     internal ProjectExecutor(Guid projectId, Guid userId)

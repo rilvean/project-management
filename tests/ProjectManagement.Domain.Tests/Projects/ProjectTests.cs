@@ -58,7 +58,7 @@ public class ProjectTests
     {
         var project = CreateProject();
 
-        project.AddExecutor(Guid.NewGuid());
+        project.AddExecutor(Guid.CreateVersion7());
         var user = project.Executors.First().UserId;
 
         project.CreateWorkTask("t", null, DateTime.UtcNow.AddDays(1));

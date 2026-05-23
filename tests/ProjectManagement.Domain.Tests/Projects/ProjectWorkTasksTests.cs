@@ -44,7 +44,7 @@ public class ProjectWorkTasksTests
         project.CreateWorkTask("Task", null, DateTime.UtcNow.AddDays(1));
 
         Assert.Throws<DomainRuleException>(() =>
-            project.AssignWorkTaskExecutor(project.WorkTasks.First().Id, Guid.NewGuid())
+            project.AssignWorkTaskExecutor(project.WorkTasks.First().Id, Guid.CreateVersion7())
         );
     }
 
@@ -53,7 +53,7 @@ public class ProjectWorkTasksTests
     {
         var project = CreateProject();
 
-        var user = Guid.NewGuid();
+        var user = Guid.CreateVersion7();
         project.AddExecutor(user);
 
         project.CreateWorkTask("Task", null, DateTime.UtcNow.AddDays(1));

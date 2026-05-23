@@ -11,7 +11,7 @@ public class ProjectExecutorsTests
     {
         var project = CreateProject();
 
-        project.AddExecutor(Guid.NewGuid());
+        project.AddExecutor(Guid.CreateVersion7());
 
         Assert.Single(project.Executors);
     }
@@ -21,7 +21,7 @@ public class ProjectExecutorsTests
     {
         var project = CreateProject();
 
-        var id = Guid.NewGuid();
+        var id = Guid.CreateVersion7();
 
         project.AddExecutor(id);
         project.AddExecutor(id);
@@ -34,7 +34,7 @@ public class ProjectExecutorsTests
     {
         var project = CreateProject();
 
-        var id = Guid.NewGuid();
+        var id = Guid.CreateVersion7();
 
         project.AssignManager(id);
 
@@ -46,7 +46,7 @@ public class ProjectExecutorsTests
     {
         var project = CreateProject();
 
-        var id = Guid.NewGuid();
+        var id = Guid.CreateVersion7();
 
         project.AddExecutor(id);
         project.RemoveExecutor(id);
@@ -59,7 +59,7 @@ public class ProjectExecutorsTests
     {
         var project = CreateProject();
 
-        var id = Guid.NewGuid();
+        var id = Guid.CreateVersion7();
 
         project.AddExecutor(id);
 
@@ -79,7 +79,7 @@ public class ProjectExecutorsTests
         var project = CreateCompletedProject();
 
         Assert.Throws<DomainRuleException>(() =>
-            project.AddExecutor(Guid.NewGuid())
+            project.AddExecutor(Guid.CreateVersion7())
         );
     }
 

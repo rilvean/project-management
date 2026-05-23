@@ -1,0 +1,22 @@
+<Project>
+    <PropertyGroup>
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+        <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    </PropertyGroup>
+    <ItemGroup>
+        <!-- Infrastructure -->
+        <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.8"/>
+        <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.8"/>
+        <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1"/>
+        <PackageVersion Include="EFCore.NamingConventions" Version="10.0.1"/>
+
+        <!-- Tests -->
+        <PackageVersion Include="xunit.v3" Version="3.2.2"/>
+        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.5.1"/>
+        <PackageVersion Include="coverlet.collector" Version="10.0.1"/>
+        <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5"/>
+
+        <!-- Transitive pinning -->
+        <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.8"/>
+    </ItemGroup>
+</Project>
