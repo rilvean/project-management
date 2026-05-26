@@ -12,5 +12,7 @@ public class ProjectExecutor
         UserId = userId;
     }
 
-    private ProjectExecutor() { }
+    private ProjectExecutor()
+    {
+    }
 }

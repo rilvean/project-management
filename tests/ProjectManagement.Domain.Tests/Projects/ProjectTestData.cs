@@ -5,20 +5,12 @@ namespace ProjectManagement.Domain.Tests.Projects;
 
 static class ProjectTestData
 {
-    public static Project CreateProject(
-        string title = "Project",
-        string? description = "Description",
-        ProjectPriority priority = ProjectPriority.Medium)
-    {
-        return new Project(title, description, priority);
-    }
+    public static Project CreateProject() => new("Project", "desc", ProjectPriority.Medium);
 
     public static Project CreateCompletedProject()
     {
-        var project = CreateProject();
-
-        project.Complete();
-
-        return project;
+        var p = CreateProject();
+        p.Complete();
+        return p;
     }
 }

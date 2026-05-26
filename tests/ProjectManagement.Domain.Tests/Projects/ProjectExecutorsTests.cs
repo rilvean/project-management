@@ -1,6 +1,4 @@
-using ProjectManagement.Domain.Enums;
 using ProjectManagement.Domain.Exceptions;
-using ProjectManagement.Domain.Models;
 
 namespace ProjectManagement.Domain.Tests.Projects;
 
@@ -9,7 +7,7 @@ public class ProjectExecutorsTests
     [Fact]
     public void AddExecutor_Should_Add_User()
     {
-        var project = CreateProject();
+        var project = ProjectTestData.CreateProject();
 
         project.AddExecutor(Guid.CreateVersion7());
 
@@ -19,7 +17,7 @@ public class ProjectExecutorsTests
     [Fact]
     public void AddExecutor_Should_Be_Idempotent()
     {
-        var project = CreateProject();
+        var project = ProjectTestData.CreateProject();
 
         var id = Guid.CreateVersion7();
 
@@ -32,7 +30,7 @@ public class ProjectExecutorsTests
     [Fact]
     public void AddExecutor_Should_Throw_When_Is_Manager()
     {
-        var project = CreateProject();
+        var project = ProjectTestData.CreateProject();
 
         var id = Guid.CreateVersion7();
 
@@ -44,7 +42,7 @@ public class ProjectExecutorsTests
     [Fact]
     public void RemoveExecutor_Should_Clear()
     {
-        var project = CreateProject();
+        var project = ProjectTestData.CreateProject();
 
         var id = Guid.CreateVersion7();
 
@@ -57,7 +55,7 @@ public class ProjectExecutorsTests
     [Fact]
     public void RemoveExecutor_Should_Throw_When_Has_Active_Tasks()
     {
-        var project = CreateProject();
+        var project = ProjectTestData.CreateProject();
 
         var id = Guid.CreateVersion7();
 
@@ -76,19 +74,30 @@ public class ProjectExecutorsTests
     [Fact]
     public void AddExecutor_Should_Throw_When_Project_Completed()
     {
-        var project = CreateCompletedProject();
+        var project = ProjectTestData.CreateCompletedProject();
 
         Assert.Throws<DomainRuleException>(() =>
             project.AddExecutor(Guid.CreateVersion7())
         );
     }
 
-    private static Project CreateProject() => new("Project", "desc", ProjectPriority.Medium);
-
-    private static Project CreateCompletedProject()
+    [Fact]
+    public void RemoveExecutor_Should_Unassign_From_Completed_Tasks()
     {
-        var p = CreateProject();
-        p.Complete();
-        return p;
+        var project = ProjectTestData.CreateProject();
+
+        var id = Guid.CreateVersion7();
+        project.AddExecutor(id);
+
+        project.CreateWorkTask("Task", null, DateTime.UtcNow.AddDays(1));
+        var task = project.WorkTasks.First();
+
+        project.AssignWorkTaskExecutor(task.Id, id);
+        project.CompleteWorkTask(task.Id);
+
+        project.RemoveExecutor(id);
+
+        Assert.Null(task.ExecutorId);
+        Assert.Empty(project.Executors);
     }
 }

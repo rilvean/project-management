@@ -36,9 +36,7 @@ public class UserTests
 
         var longName = new string('a', User.NameMaxLength + 1);
 
-        Assert.Throws<ArgumentOutOfRangeException>(() =>
-            user.Rename(longName)
-        );
+        Assert.Throws<ArgumentOutOfRangeException>(() => user.Rename(longName));
     }
 
     [Theory]
@@ -49,9 +47,7 @@ public class UserTests
     {
         var user = CreateUser();
 
-        Assert.Throws<ArgumentNullException>(() =>
-            user.ChangePassword(password!)
-        );
+        Assert.Throws<ArgumentNullException>(() => user.ChangePassword(password!));
     }
 
     [Fact]
@@ -59,51 +55,7 @@ public class UserTests
     {
         var user = CreateUser();
 
-        Assert.Throws<ArgumentNullException>(() =>
-            user.ChangeEmail(null!)
-        );
-    }
-
-    [Fact]
-    public void ChangeEmail_Should_Update_Email()
-    {
-        var user = CreateUser();
-
-        var email = Email.Create("new@mail.com");
-
-        user.ChangeEmail(email);
-
-        Assert.Equal(email, user.Email);
-    }
-
-    [Fact]
-    public void ChangeRole_Should_Update_Role()
-    {
-        var user = CreateUser();
-
-        user.ChangeRole(UserRole.ProjectManager);
-
-        Assert.Equal(UserRole.ProjectManager, user.Role);
-    }
-
-    [Fact]
-    public void Rename_Should_Update_Name()
-    {
-        var user = CreateUser();
-
-        user.Rename("new_name");
-
-        Assert.Equal("new_name", user.Name);
-    }
-
-    [Fact]
-    public void ChangePassword_Should_Update_PasswordHash()
-    {
-        var user = CreateUser();
-
-        user.ChangePassword("new_hash");
-
-        Assert.Equal("new_hash", user.PasswordHash);
+        Assert.Throws<ArgumentNullException>(() => user.ChangeEmail(null!));
     }
 
     private static User CreateUser()

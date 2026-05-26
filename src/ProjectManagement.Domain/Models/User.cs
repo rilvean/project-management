@@ -21,7 +21,9 @@ public class User : IAuditable
         Role = role;
     }
 
-    private User() { }
+    private User()
+    {
+    }
 
 
     public Guid Id { get; private init; } = Guid.CreateVersion7();

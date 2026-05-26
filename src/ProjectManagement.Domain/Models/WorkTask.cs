@@ -21,7 +21,9 @@ public class WorkTask : IAuditable
         Description = description;
     }
 
-    private WorkTask() { }
+    private WorkTask()
+    {
+    }
 
 
     public Guid Id { get; private init; } = Guid.CreateVersion7();

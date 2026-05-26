@@ -1,3 +1,5 @@
 namespace ProjectManagement.Domain.Interfaces;
 
-public interface IAuditable { }
+public interface IAuditable
+{
+}

@@ -1,3 +1,5 @@
 namespace ProjectManagement.Domain.Exceptions;
 
-public class DuplicateException(string message) : Exception(message) { }
+public class DuplicateException(string message) : Exception(message)
+{
+}

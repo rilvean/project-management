@@ -1,3 +1,5 @@
 namespace ProjectManagement.Domain.Exceptions;
 
-public class DomainRuleException(string message) : Exception(message) { }
+public class DomainRuleException(string message) : Exception(message)
+{
+}

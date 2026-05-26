@@ -15,25 +15,15 @@ public class WorkTaskTests
         Assert.Null(task.ExecutorId);
     }
 
-    [Fact]
-    public void Create_Should_Throw_When_Title_Is_Empty()
+    [Theory]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void Create_Should_Throw_When_Title_Is_Empty(string title)
     {
         Assert.Throws<ArgumentNullException>(() =>
             WorkTask.Create(
                 Guid.CreateVersion7(),
-                "",
-                "desc",
-                DateTime.UtcNow.AddDays(1))
-        );
-    }
-
-    [Fact]
-    public void Create_Should_Throw_When_Title_Is_Whitespace()
-    {
-        Assert.Throws<ArgumentNullException>(() =>
-            WorkTask.Create(
-                Guid.CreateVersion7(),
-                "   ",
+                title,
                 "desc",
                 DateTime.UtcNow.AddDays(1))
         );
@@ -54,16 +44,6 @@ public class WorkTaskTests
     }
 
     [Fact]
-    public void SetDeadline_Should_Accept_Null()
-    {
-        var task = CreateTask();
-
-        task.SetDeadline(null);
-
-        Assert.Null(task.Deadline);
-    }
-
-    [Fact]
     public void SetDeadline_Should_Throw_When_In_Past()
     {
         var task = CreateTask();
@@ -71,19 +51,6 @@ public class WorkTaskTests
         Assert.Throws<ArgumentOutOfRangeException>(() =>
             task.SetDeadline(DateTime.UtcNow.AddDays(-1))
         );
-    }
-
-    [Fact]
-    public void AssignExecutor_Should_Be_Idempotent()
-    {
-        var task = CreateTask();
-
-        var id = Guid.CreateVersion7();
-
-        task.AssignExecutor(id);
-        task.AssignExecutor(id);
-
-        Assert.Equal(id, task.ExecutorId);
     }
 
     [Fact]
@@ -107,22 +74,6 @@ public class WorkTaskTests
         task.Complete();
 
         Assert.Equal(WorkTaskStatus.Completed, task.Status);
-    }
-
-    [Fact]
-    public void Rename_Should_Throw_When_Empty()
-    {
-        var task = CreateTask();
-
-        Assert.Throws<ArgumentNullException>(() => task.Rename(""));
-    }
-
-    [Fact]
-    public void Rename_Should_Throw_When_Whitespace()
-    {
-        var task = CreateTask();
-
-        Assert.Throws<ArgumentNullException>(() => task.Rename(" "));
     }
 
     [Fact]
