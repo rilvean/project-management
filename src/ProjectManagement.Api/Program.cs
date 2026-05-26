@@ -1,7 +1,9 @@
+using System.Text.Json.Serialization;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Diagnostics;
 using ProjectManagement.Api.Extensions;
+using ProjectManagement.Api.Features;
 using ProjectManagement.Api.Services;
 using ProjectManagement.Api.Shared;
 using ProjectManagement.Infrastructure.Persistence.Extensions;
@@ -18,6 +20,9 @@ builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 builder.Services.AddTransient(
     typeof(IPipelineBehavior<,>),
     typeof(ValidationBehavior<,>));
+
+builder.Services.ConfigureHttpJsonOptions(options =>
+    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
 var app = builder.Build();
 
@@ -42,5 +47,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapFeaturesEndpoints();
 
 app.Run();

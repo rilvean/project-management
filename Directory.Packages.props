@@ -23,6 +23,7 @@
 
         <!-- Auth -->
         <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.8"/>
+        <PackageVersion Include="BCrypt.Net-Next" Version="4.2.0"/>
 
         <!-- OpenApi -->
         <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="10.0.8"/>
