@@ -9,7 +9,7 @@ public static class ProjectsEndpoints
         var group = app.MapGroup("/projects").WithTags("Projects");
 
         group.MapGetProjectById();
-        
+
         return app;
     }
 }
