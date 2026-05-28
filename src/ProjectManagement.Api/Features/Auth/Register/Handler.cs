@@ -1,6 +1,5 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using ProjectManagement.Domain.Exceptions;
 using ProjectManagement.Domain.Models;
 using ProjectManagement.Domain.ValueObjects;
 using ProjectManagement.Infrastructure.Persistence;
@@ -8,9 +7,9 @@ using ProjectManagement.Infrastructure.Persistence;
 namespace ProjectManagement.Api.Features.Auth.Register;
 
 public sealed class Handler(ProjectManagementDbContext db)
-    : IRequestHandler<RegisterCommand, Guid>
+    : IRequestHandler<RegisterCommand, RegisterResponse>
 {
-    public async Task<Guid> Handle(
+    public async Task<RegisterResponse> Handle(
         RegisterCommand request,
         CancellationToken ct)
     {
@@ -18,7 +17,7 @@ public sealed class Handler(ProjectManagementDbContext db)
             .AnyAsync(x => x.Email == request.Email, ct);
 
         if (exists)
-            throw new DomainRuleException("User already exists.");
+            throw new("User already exists.");
 
         var passwordHash =
             BCrypt.Net.BCrypt.HashPassword(request.Password);
@@ -33,6 +32,6 @@ public sealed class Handler(ProjectManagementDbContext db)
 
         await db.SaveChangesAsync(ct);
 
-        return user.Id;
+        return new RegisterResponse(user.Id);
     }
 }

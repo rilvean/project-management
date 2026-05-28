@@ -12,6 +12,7 @@ public sealed class Validator : AbstractValidator<LoginCommand>
             .Matches(Email.Pattern);
 
         RuleFor(x => x.Password)
-            .NotEmpty();
+            .NotEmpty()
+            .MinimumLength(8);
     }
 }

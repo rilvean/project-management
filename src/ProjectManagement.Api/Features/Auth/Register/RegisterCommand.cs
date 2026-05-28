@@ -8,4 +8,4 @@ public sealed record RegisterCommand(
     string Email,
     string Password,
     UserRole Role
-) : IRequest<Guid>;
+) : IRequest<RegisterResponse>;

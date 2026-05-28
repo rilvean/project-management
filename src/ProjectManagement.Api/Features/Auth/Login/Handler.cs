@@ -2,16 +2,15 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ProjectManagement.Api.Services;
 using ProjectManagement.Infrastructure.Persistence;
-using ProjectManagement.Domain.Exceptions;
 
 namespace ProjectManagement.Api.Features.Auth.Login;
 
 public sealed class Handler(
     ProjectManagementDbContext db,
     JwtProvider jwtProvider)
-    : IRequestHandler<LoginCommand, string>
+    : IRequestHandler<LoginCommand, LoginResponse>
 {
-    public async Task<string> Handle(
+    public async Task<LoginResponse> Handle(
         LoginCommand request,
         CancellationToken ct)
     {
@@ -19,17 +18,17 @@ public sealed class Handler(
             .FirstOrDefaultAsync(x => x.Email == request.Email, ct);
 
         if (user is null)
-            throw new DomainRuleException("Invalid credentials");
+            throw new("Invalid credentials");
 
         var isValid = BCrypt.Net.BCrypt.Verify(
             request.Password,
             user.PasswordHash);
 
         if (!isValid)
-            throw new DomainRuleException("Invalid credentials");
+            throw new("Invalid credentials");
 
         var token = jwtProvider.Generate(user);
 
-        return token;
+        return new LoginResponse(token);
     }
 }

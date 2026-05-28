@@ -9,11 +9,11 @@ public static class Endpoint
     {
         group.MapPost("login",
             async (
-                [FromBody] LoginCommand loginCommand,
+                [FromBody] LoginCommand command,
                 [FromServices] ISender sender,
                 CancellationToken ct) =>
             {
-                var result = await sender.Send(loginCommand, ct);
+                var result = await sender.Send(command, ct);
                 return TypedResults.Ok(result);
             });
 

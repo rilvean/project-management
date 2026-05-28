@@ -18,7 +18,8 @@ public sealed class Validator : AbstractValidator<RegisterCommand>
             .Matches(Email.Pattern);
 
         RuleFor(x => x.Password)
-            .NotEmpty();
+            .NotEmpty()
+            .MinimumLength(8);
 
         RuleFor(x => x.Role)
             .IsInEnum();
