@@ -9,12 +9,12 @@ public class AuditInterceptor : SaveChangesInterceptor
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
         DbContextEventData eventData,
         InterceptionResult<int> result,
-        CancellationToken cancellationToken = default)
+        CancellationToken ct = default)
     {
         var context = eventData.Context;
 
         if (context is null)
-            return base.SavingChangesAsync(eventData, result, cancellationToken);
+            return base.SavingChangesAsync(eventData, result, ct);
 
         var now = DateTime.UtcNow;
 
@@ -31,6 +31,6 @@ public class AuditInterceptor : SaveChangesInterceptor
             entry.Property("UpdatedAt").CurrentValue = now;
         }
 
-        return base.SavingChangesAsync(eventData, result, cancellationToken);
+        return base.SavingChangesAsync(eventData, result, ct);
     }
 }

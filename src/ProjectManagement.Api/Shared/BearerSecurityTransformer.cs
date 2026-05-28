@@ -8,7 +8,7 @@ public class BearerSecurityTransformer : IOpenApiDocumentTransformer
     public Task TransformAsync(
         OpenApiDocument document,
         OpenApiDocumentTransformerContext context,
-        CancellationToken cancellationToken)
+        CancellationToken ct)
     {
         document.Components ??= new OpenApiComponents();
 
