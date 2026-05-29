@@ -10,7 +10,7 @@ public static class Endpoint
 {
     public static RouteGroupBuilder MapGetUsersPage(this RouteGroupBuilder group)
     {
-        group.MapGet("get-page", Handle);
+        group.MapGet(string.Empty, Handle);
         return group;
     }
 
