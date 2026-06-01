@@ -18,14 +18,14 @@ public sealed class Handler(
             .FirstOrDefaultAsync(x => x.Email == request.Email, ct);
 
         if (user is null)
-            throw new("Invalid credentials");
+            throw new("Invalid email");
 
         var isValid = BCrypt.Net.BCrypt.Verify(
             request.Password,
             user.PasswordHash);
 
         if (!isValid)
-            throw new("Invalid credentials");
+            throw new("Invalid password");
 
         var token = jwtProvider.Generate(user);
 

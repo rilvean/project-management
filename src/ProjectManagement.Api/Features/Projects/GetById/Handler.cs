@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using ProjectManagement.Api.Features.Projects.Shared;
 using ProjectManagement.Infrastructure.Persistence;
 
@@ -9,18 +10,22 @@ public class Handler(ProjectManagementDbContext db)
 {
     public async Task<ProjectResponse> Handle(GetProjectByIdQuery request, CancellationToken ct)
     {
-        var project = await db.Projects.FindAsync(request.ProjectId, ct);
+        var project = await db.Projects
+            .AsNoTracking()
+            .Where(p => p.Id == request.ProjectId)
+            .Select(x => new ProjectResponse(
+                x.Id,
+                x.ManagerId,
+                x.Title,
+                x.Description,
+                x.Priority,
+                x.Status
+            ))
+            .FirstOrDefaultAsync(ct);
 
         if (project is null)
             throw new("Project not found");
 
-        return new ProjectResponse(
-            project.Id,
-            project.ManagerId,
-            project.Title,
-            project.Description,
-            project.Priority,
-            project.Status
-        );
+        return project;
     }
 }

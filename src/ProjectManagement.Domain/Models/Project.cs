@@ -126,13 +126,15 @@ public class Project : IAuditable
         Status = ProjectStatus.Completed;
     }
 
-    public void CreateWorkTask(string title, string? description, DateTime? deadline)
+    public WorkTask CreateWorkTask(string title, string? description, DateTime? deadline)
     {
         EnsureEditable();
 
         var workTask = WorkTask.Create(Id, title, description, deadline);
 
         _workTasks.Add(workTask);
+
+        return workTask;
     }
 
     public void RemoveWorkTask(Guid workTaskId)

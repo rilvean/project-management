@@ -8,9 +8,9 @@ using ProjectManagement.Api.Features.Users.Rename;
 
 namespace ProjectManagement.Api.Features.Users;
 
-public static class UsersEndpoints
+public static class UserEndpoints
 {
-    public static IEndpointRouteBuilder MapUsersEndpoints(this IEndpointRouteBuilder app)
+    public static IEndpointRouteBuilder MapUserEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("/users").WithTags("Users");
 
