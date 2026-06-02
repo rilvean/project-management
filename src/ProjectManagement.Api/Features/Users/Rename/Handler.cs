@@ -8,7 +8,7 @@ public sealed class Handler(ProjectManagementDbContext db)
 {
     public async Task Handle(RenameUserCommand request, CancellationToken ct)
     {
-        var user = await db.Users.FindAsync(request.UserId, ct);
+        var user = await db.Users.FindAsync([request.UserId], ct);
 
         if (user is null)
             throw new("User not found");

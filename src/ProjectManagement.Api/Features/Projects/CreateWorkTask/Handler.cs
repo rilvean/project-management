@@ -8,7 +8,7 @@ public class Handler(ProjectManagementDbContext db)
 {
     public async Task<CreateWorkTaskResponse> Handle(CreateWorkTaskCommand request, CancellationToken ct)
     {
-        var project = await db.Projects.FindAsync(request.ProjectId, ct);
+        var project = await db.Projects.FindAsync([request.ProjectId], ct);
 
         if (project is null)
             throw new("Project not found");
