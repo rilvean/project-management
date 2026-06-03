@@ -18,7 +18,10 @@ public sealed class Handler(WriteDbContext db)
         if (project is null)
             throw new("Project not found");
 
-        if (!ProjectPolicies.CanEdit(project, request.ActorId))
+        var actor = await db.Users.FindAsync([request.ActorId], ct)
+            ?? throw new Exception("Actor not found");
+
+        if (!ProjectPolicies.CanEdit(project, actor))
         {
             throw new("User do not have permission to edit this project");
         }

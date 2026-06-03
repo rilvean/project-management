@@ -16,7 +16,7 @@ public sealed class Handler(WriteDbContext db)
         );
 
         await db.Projects.AddAsync(project, ct);
-
+        await db.SaveChangesAsync(ct);
         return new CreateProjectResponse(project.Id);
     }
 }

@@ -12,9 +12,9 @@ public sealed class Handler(ReadDbContext db)
     {
         var query = db.Users;
 
-        var total = query.CountAsync(ct);
+        var total = await query.CountAsync(ct);
 
-        var items = query
+        var items = await query
             .OrderBy(x => x.Id)
             .Skip((request.Page - 1) * request.PageSize)
             .Take(request.PageSize)
@@ -27,8 +27,8 @@ public sealed class Handler(ReadDbContext db)
             .ToListAsync(ct);
 
         return new PagedResponse<UserResponse>(
-            await items,
-            await total,
+            items,
+            total,
             request.Page,
             request.PageSize
         );

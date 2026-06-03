@@ -1,13 +1,17 @@
+using ProjectManagement.Domain.Enums;
 using ProjectManagement.Domain.Models;
 
 namespace ProjectManagement.Domain.Services;
 
 public static class ProjectPolicies
 {
-    public static bool CanEdit(Project project, Guid userId)
+    public static bool CanEdit(Project project, User user)
     {
-        if (project.ManagerId == userId) return true;
-
-        return false;
+        return user.Role switch
+        {
+            UserRole.ProjectManager => project.ManagerId == user.Id,
+            UserRole.Supervisor => true,
+            _ => false
+        };
     }
 }
