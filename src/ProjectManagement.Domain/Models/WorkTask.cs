@@ -4,7 +4,7 @@ using ProjectManagement.Domain.Interfaces;
 
 namespace ProjectManagement.Domain.Models;
 
-public class WorkTask : IAuditable
+public sealed class WorkTask : IAuditable
 {
     public const int MaxTitleLength = 400;
     public const int MaxDescriptionLength = 2000;

@@ -3,7 +3,7 @@ using ProjectManagement.Domain.Models;
 
 namespace ProjectManagement.Api.Features.Projects.Rename;
 
-public class Validator : AbstractValidator<RenameProjectCommand>
+public sealed class Validator : AbstractValidator<RenameProjectCommand>
 {
     public Validator()
     {
@@ -13,7 +13,7 @@ public class Validator : AbstractValidator<RenameProjectCommand>
 
         RuleFor(x => x.ProjectId)
             .NotEmpty();
-        
+
         RuleFor(x => x.ActorId)
             .NotEmpty();
     }

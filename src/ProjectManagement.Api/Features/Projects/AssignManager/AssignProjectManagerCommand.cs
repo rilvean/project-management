@@ -2,7 +2,7 @@ using MediatR;
 
 namespace ProjectManagement.Api.Features.Projects.AssignManager;
 
-public record AssignProjectManagerCommand(
+public sealed record AssignProjectManagerCommand(
     Guid ProjectId,
     Guid ManagerId
 ) : IRequest;

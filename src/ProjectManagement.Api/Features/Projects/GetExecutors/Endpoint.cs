@@ -18,7 +18,7 @@ public static class Endpoint
         [FromServices] ISender sender,
         CancellationToken ct)
     {
-        var query = new  GetExecutorsQuery(id);
+        var query = new GetExecutorsQuery(id);
         var response = await sender.Send(query, ct);
         return TypedResults.Ok(response);
     }

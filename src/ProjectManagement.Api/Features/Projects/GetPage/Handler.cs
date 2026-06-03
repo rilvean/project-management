@@ -6,12 +6,10 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Projects.GetPage;
 
-public class Handler(ReadDbContext db)
+public sealed class Handler(ReadDbContext db)
     : IRequestHandler<GetProjectsPageQuery, PagedResponse<ProjectResponse>>
 {
-    public async Task<PagedResponse<ProjectResponse>> Handle(
-        GetProjectsPageQuery request,
-        CancellationToken ct)
+    public async Task<PagedResponse<ProjectResponse>> Handle(GetProjectsPageQuery request, CancellationToken ct)
     {
         var query = db.Projects;
 

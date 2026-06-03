@@ -1,12 +1,11 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using ProjectManagement.Api.Features.WorkTasks.ChangeDeadline;
 using ProjectManagement.Domain.Services;
 using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.WorkTasks.ChangeDescription;
 
-public class Handler(WriteDbContext db)
+public sealed class Handler(WriteDbContext db)
     : IRequestHandler<ChangeWorkTaskDescriptionCommand>
 {
     public async Task Handle(ChangeWorkTaskDescriptionCommand request, CancellationToken ct)

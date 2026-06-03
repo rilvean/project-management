@@ -1,12 +1,11 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using ProjectManagement.Api.Features.Projects.ChangeDescription;
 using ProjectManagement.Domain.Services;
 using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Projects.Rename;
 
-public class Handler(WriteDbContext db)
+public sealed class Handler(WriteDbContext db)
     : IRequestHandler<RenameProjectCommand>
 {
     public async Task Handle(RenameProjectCommand request, CancellationToken ct)

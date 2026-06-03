@@ -2,7 +2,7 @@ using ProjectManagement.Domain.Enums;
 
 namespace ProjectManagement.Api.Features.Projects.Shared;
 
-public record ProjectResponse(
+public sealed record ProjectResponse(
     Guid Id,
     Guid? ManagerId,
     string Title,

@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace ProjectManagement.Api.Features.WorkTasks.ChangeDeadline;
 
-public class Validator : AbstractValidator<ChangeWorkTaskDeadlineCommand>
+public sealed class Validator : AbstractValidator<ChangeWorkTaskDeadlineCommand>
 {
     public Validator()
     {

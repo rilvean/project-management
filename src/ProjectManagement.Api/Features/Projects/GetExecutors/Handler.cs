@@ -5,7 +5,7 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Projects.GetExecutors;
 
-public class Handler(ReadDbContext db)
+public sealed class Handler(ReadDbContext db)
     : IRequestHandler<GetExecutorsQuery, List<UserResponse>>
 {
     public async Task<List<UserResponse>> Handle(GetExecutorsQuery request, CancellationToken ct)

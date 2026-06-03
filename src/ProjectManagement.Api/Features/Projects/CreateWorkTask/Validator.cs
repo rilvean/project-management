@@ -3,7 +3,7 @@ using ProjectManagement.Domain.Models;
 
 namespace ProjectManagement.Api.Features.Projects.CreateWorkTask;
 
-public class Validator : AbstractValidator<CreateWorkTaskCommand>
+public sealed class Validator : AbstractValidator<CreateWorkTaskCommand>
 {
     public Validator()
     {

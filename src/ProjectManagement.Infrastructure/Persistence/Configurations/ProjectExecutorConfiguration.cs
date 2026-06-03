@@ -4,7 +4,7 @@ using ProjectManagement.Domain.Models;
 
 namespace ProjectManagement.Infrastructure.Persistence.Configurations;
 
-public class ProjectExecutorConfiguration : IEntityTypeConfiguration<ProjectExecutor>
+public sealed class ProjectExecutorConfiguration : IEntityTypeConfiguration<ProjectExecutor>
 {
     public void Configure(EntityTypeBuilder<ProjectExecutor> builder)
     {

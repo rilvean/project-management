@@ -1,3 +1,3 @@
 namespace ProjectManagement.Api.Features.Auth.Register;
 
-public record RegisterResponse(Guid UserId);
+public sealed record RegisterResponse(Guid UserId);

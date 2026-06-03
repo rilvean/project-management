@@ -2,7 +2,6 @@ using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using ProjectManagement.Api.Features.WorkTasks.AssignExecutor;
 
 namespace ProjectManagement.Api.Features.WorkTasks.UnassignExecutor;
 

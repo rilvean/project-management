@@ -5,7 +5,7 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.WorkTasks.GetMy;
 
-public class Handler(ReadDbContext db)
+public sealed class Handler(ReadDbContext db)
     : IRequestHandler<GetMyWorkTasksQuery, List<WorkTaskResponse>>
 {
     public Task<List<WorkTaskResponse>> Handle(GetMyWorkTasksQuery request, CancellationToken ct)

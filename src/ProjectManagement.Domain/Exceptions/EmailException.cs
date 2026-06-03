@@ -1,5 +1,5 @@
 namespace ProjectManagement.Domain.Exceptions;
 
-public class EmailException(string message) : Exception(message)
+public sealed class EmailException(string message) : Exception(message)
 {
 }

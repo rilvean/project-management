@@ -2,7 +2,7 @@ using MediatR;
 
 namespace ProjectManagement.Api.Features.WorkTasks.Rename;
 
-public record RenameWorkTaskCommand(
+public sealed record RenameWorkTaskCommand(
     Guid WorkTaskId,
     string Title,
     Guid ActorId

@@ -1,11 +1,9 @@
 using MediatR;
-using ProjectManagement.Api.Features.Projects.AssignManager;
-using ProjectManagement.Domain.Services;
 using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Projects.UnassignManager;
 
-public class Handler(WriteDbContext db)
+public sealed class Handler(WriteDbContext db)
     : IRequestHandler<UnassignProjectManagerCommand>
 {
     public async Task Handle(UnassignProjectManagerCommand request, CancellationToken ct)

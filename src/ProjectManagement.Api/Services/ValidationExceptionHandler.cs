@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ProjectManagement.Api.Services;
 
-public class ValidationExceptionHandler : IExceptionHandler
+public sealed class ValidationExceptionHandler : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(
         HttpContext httpContext,

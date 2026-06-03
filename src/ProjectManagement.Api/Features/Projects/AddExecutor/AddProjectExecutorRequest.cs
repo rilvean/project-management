@@ -1,3 +1,3 @@
 namespace ProjectManagement.Api.Features.Projects.AddExecutor;
 
-public record AddProjectExecutorRequest(Guid ExecutorId);
+public sealed record AddProjectExecutorRequest(Guid ExecutorId);

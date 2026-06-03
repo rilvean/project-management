@@ -2,7 +2,7 @@ using MediatR;
 
 namespace ProjectManagement.Api.Features.Projects.Delete;
 
-public record DeleteProjectCommand(
+public sealed record DeleteProjectCommand(
     Guid ProjectId,
     Guid ActorId
 ) : IRequest;

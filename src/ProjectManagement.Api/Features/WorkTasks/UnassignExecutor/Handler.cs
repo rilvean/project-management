@@ -5,7 +5,7 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.WorkTasks.UnassignExecutor;
 
-public class Handler(WriteDbContext db)
+public sealed class Handler(WriteDbContext db)
     : IRequestHandler<UnassignWorkTaskExecutorCommand>
 {
     public async Task Handle(UnassignWorkTaskExecutorCommand request, CancellationToken ct)

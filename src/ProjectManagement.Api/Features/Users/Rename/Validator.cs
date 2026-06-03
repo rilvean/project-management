@@ -3,7 +3,7 @@ using ProjectManagement.Domain.Models;
 
 namespace ProjectManagement.Api.Features.Users.Rename;
 
-public class Validator : AbstractValidator<RenameUserCommand>
+public sealed class Validator : AbstractValidator<RenameUserCommand>
 {
     public Validator()
     {

@@ -1,6 +1,6 @@
 namespace ProjectManagement.Api.Features.Projects.CreateWorkTask;
 
-public record CreateWorkTaskRequest(
+public sealed record CreateWorkTaskRequest(
     string Title,
     string? Description,
     DateTime? Deadline

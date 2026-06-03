@@ -1,12 +1,11 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using ProjectManagement.Api.Features.Projects.AddExecutor;
 using ProjectManagement.Domain.Services;
 using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Projects.ChangeDescription;
 
-public class Handler(WriteDbContext db)
+public sealed class Handler(WriteDbContext db)
     : IRequestHandler<ChangeProjectDescriptionCommand>
 {
     public async Task Handle(ChangeProjectDescriptionCommand request, CancellationToken ct)

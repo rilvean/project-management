@@ -5,7 +5,7 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.WorkTasks.Complete;
 
-public class Handler(WriteDbContext db)
+public sealed class Handler(WriteDbContext db)
     : IRequestHandler<CompleteWorkTaskCommand>
 {
     public async Task Handle(CompleteWorkTaskCommand request, CancellationToken ct)

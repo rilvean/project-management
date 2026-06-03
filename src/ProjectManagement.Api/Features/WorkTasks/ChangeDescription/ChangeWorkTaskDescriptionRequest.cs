@@ -1,3 +1,3 @@
 namespace ProjectManagement.Api.Features.WorkTasks.ChangeDescription;
 
-public record ChangeWorkTaskDescriptionRequest(string? Description);
+public sealed record ChangeWorkTaskDescriptionRequest(string? Description);

@@ -1,12 +1,11 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using ProjectManagement.Api.Features.WorkTasks.Complete;
 using ProjectManagement.Domain.Services;
 using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Projects.Complete;
 
-public class Handler(WriteDbContext db)
+public sealed class Handler(WriteDbContext db)
     : IRequestHandler<CompleteProjectCommand>
 {
     public async Task Handle(CompleteProjectCommand request, CancellationToken ct)

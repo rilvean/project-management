@@ -2,7 +2,7 @@ using MediatR;
 
 namespace ProjectManagement.Api.Features.Projects.CreateWorkTask;
 
-public record CreateWorkTaskCommand(
+public sealed record CreateWorkTaskCommand(
     Guid ProjectId,
     string Title,
     string? Description,

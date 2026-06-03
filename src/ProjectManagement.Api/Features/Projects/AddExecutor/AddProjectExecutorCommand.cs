@@ -2,7 +2,7 @@ using MediatR;
 
 namespace ProjectManagement.Api.Features.Projects.AddExecutor;
 
-public record AddProjectExecutorCommand(
+public sealed record AddProjectExecutorCommand(
     Guid ProjectId,
     Guid ExecutorId,
     Guid ActorId

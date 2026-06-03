@@ -3,7 +3,7 @@ using ProjectManagement.Domain.ValueObjects;
 
 namespace ProjectManagement.Api.Features.Users.ChangeEmail;
 
-public class Validator : AbstractValidator<ChangeEmailCommand>
+public sealed class Validator : AbstractValidator<ChangeEmailCommand>
 {
     public Validator()
     {

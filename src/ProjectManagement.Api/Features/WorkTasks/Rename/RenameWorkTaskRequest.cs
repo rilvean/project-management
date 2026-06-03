@@ -1,3 +1,3 @@
 namespace ProjectManagement.Api.Features.WorkTasks.Rename;
 
-public record RenameWorkTaskRequest(string Title);
+public sealed record RenameWorkTaskRequest(string Title);

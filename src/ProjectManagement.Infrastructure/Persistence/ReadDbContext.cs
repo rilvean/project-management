@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using ProjectManagement.Domain.Enums;
 using ProjectManagement.Domain.Models;
 using ProjectManagement.Infrastructure.Persistence.Extensions;
 

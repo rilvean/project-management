@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace ProjectManagement.Api.Features.Users.ChangePassword;
 
-public class Validator : AbstractValidator<ChangePasswordCommand>
+public sealed class Validator : AbstractValidator<ChangePasswordCommand>
 {
     public Validator()
     {

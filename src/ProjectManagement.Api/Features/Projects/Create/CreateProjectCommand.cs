@@ -3,7 +3,7 @@ using ProjectManagement.Domain.Enums;
 
 namespace ProjectManagement.Api.Features.Projects.Create;
 
-public record CreateProjectCommand(
+public sealed record CreateProjectCommand(
     string Title,
     string? Description,
     ProjectPriority Priority

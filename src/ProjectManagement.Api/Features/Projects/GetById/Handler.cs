@@ -5,7 +5,7 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Projects.GetById;
 
-public class Handler(ReadDbContext db)
+public sealed class Handler(ReadDbContext db)
     : IRequestHandler<GetProjectByIdQuery, ProjectResponse>
 {
     public async Task<ProjectResponse> Handle(GetProjectByIdQuery request, CancellationToken ct)

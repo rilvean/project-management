@@ -2,7 +2,7 @@ using MediatR;
 
 namespace ProjectManagement.Api.Features.Projects.RemoveExecutor;
 
-public record RemoveProjectExecutorCommand(
+public sealed record RemoveProjectExecutorCommand(
     Guid ProjectId,
     Guid ExecutorId,
     Guid ActorId

@@ -4,7 +4,7 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Projects.Create;
 
-public class Handler(WriteDbContext db)
+public sealed class Handler(WriteDbContext db)
     : IRequestHandler<CreateProjectCommand, CreateProjectResponse>
 {
     public async Task<CreateProjectResponse> Handle(CreateProjectCommand request, CancellationToken ct)

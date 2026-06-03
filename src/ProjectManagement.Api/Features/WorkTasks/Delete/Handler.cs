@@ -5,7 +5,7 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.WorkTasks.Delete;
 
-public class Handler(WriteDbContext db)
+public sealed class Handler(WriteDbContext db)
     : IRequestHandler<DeleteWorkTaskCommand>
 {
     public async Task Handle(DeleteWorkTaskCommand request, CancellationToken ct)
@@ -21,7 +21,7 @@ public class Handler(WriteDbContext db)
         {
             throw new("User do not have permission to delete this task");
         }
-        
+
         project.RemoveWorkTask(request.WorkTaskId);
 
         await db.SaveChangesAsync(ct);

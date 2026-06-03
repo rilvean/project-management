@@ -3,7 +3,7 @@ using Microsoft.OpenApi;
 
 namespace ProjectManagement.Api.Shared;
 
-public class BearerSecurityTransformer : IOpenApiDocumentTransformer
+public sealed class BearerSecurityTransformer : IOpenApiDocumentTransformer
 {
     public Task TransformAsync(
         OpenApiDocument document,

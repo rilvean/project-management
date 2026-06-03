@@ -2,7 +2,6 @@ using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.Api.Features.Shared;
-using ProjectManagement.Api.Shared;
 
 namespace ProjectManagement.Api.Features.Users.GetById;
 

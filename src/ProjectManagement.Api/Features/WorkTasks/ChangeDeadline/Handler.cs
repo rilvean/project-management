@@ -5,7 +5,7 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.WorkTasks.ChangeDeadline;
 
-public class Handler(WriteDbContext db)
+public sealed class Handler(WriteDbContext db)
     : IRequestHandler<ChangeWorkTaskDeadlineCommand>
 {
     public async Task Handle(ChangeWorkTaskDeadlineCommand request, CancellationToken ct)

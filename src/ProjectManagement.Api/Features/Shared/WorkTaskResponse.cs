@@ -2,7 +2,7 @@ using ProjectManagement.Domain.Enums;
 
 namespace ProjectManagement.Api.Features.Shared;
 
-public record WorkTaskResponse(
+public sealed record WorkTaskResponse(
     Guid Id,
     Guid ProjectId,
     Guid? ExecutorId,

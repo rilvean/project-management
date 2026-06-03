@@ -1,3 +1,3 @@
 namespace ProjectManagement.Api.Features.Projects.RemoveExecutor;
 
-public record RemoveProjectExecutorRequest(Guid ExecutorId);
+public sealed record RemoveProjectExecutorRequest(Guid ExecutorId);

@@ -4,7 +4,7 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Users.ChangeEmail;
 
-public class Handler(WriteDbContext db)
+public sealed class Handler(WriteDbContext db)
     : IRequestHandler<ChangeEmailCommand>
 {
     public async Task Handle(ChangeEmailCommand request, CancellationToken ct)

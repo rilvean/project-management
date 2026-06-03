@@ -4,7 +4,7 @@ using ProjectManagement.Domain.Interfaces;
 
 namespace ProjectManagement.Infrastructure.Persistence.Interceptors;
 
-public class AuditInterceptor : SaveChangesInterceptor
+public sealed class AuditInterceptor : SaveChangesInterceptor
 {
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
         DbContextEventData eventData,

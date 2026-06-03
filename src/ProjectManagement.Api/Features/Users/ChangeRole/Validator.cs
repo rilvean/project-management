@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace ProjectManagement.Api.Features.Users.ChangeRole;
 
-public class Validator : AbstractValidator<ChangeRoleCommand>
+public sealed class Validator : AbstractValidator<ChangeRoleCommand>
 {
     public Validator()
     {

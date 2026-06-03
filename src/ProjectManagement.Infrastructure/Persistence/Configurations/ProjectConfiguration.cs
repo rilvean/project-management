@@ -5,7 +5,7 @@ using ProjectManagement.Infrastructure.Persistence.Extensions;
 
 namespace ProjectManagement.Infrastructure.Persistence.Configurations;
 
-public class ProjectConfiguration : IEntityTypeConfiguration<Project>
+public sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
 {
     public void Configure(EntityTypeBuilder<Project> builder)
     {

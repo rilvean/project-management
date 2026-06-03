@@ -5,8 +5,8 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.WorkTasks.AssignExecutor;
 
-public class Handler(WriteDbContext db) 
-: IRequestHandler<AssignWorkTaskExecutorCommand>
+public sealed class Handler(WriteDbContext db)
+    : IRequestHandler<AssignWorkTaskExecutorCommand>
 {
     public async Task Handle(AssignWorkTaskExecutorCommand request, CancellationToken ct)
     {
@@ -21,8 +21,8 @@ public class Handler(WriteDbContext db)
         {
             throw new("User do not have permission to edit this task");
         }
-        
-        project.AssignWorkTaskExecutor(request.WorkTaskId ,request.ExecutorId);
+
+        project.AssignWorkTaskExecutor(request.WorkTaskId, request.ExecutorId);
 
         await db.SaveChangesAsync(ct);
     }

@@ -3,7 +3,7 @@ using ProjectManagement.Domain.Models;
 
 namespace ProjectManagement.Api.Features.Projects.ChangeDescription;
 
-public class Validator : AbstractValidator<ChangeProjectDescriptionCommand>
+public sealed class Validator : AbstractValidator<ChangeProjectDescriptionCommand>
 {
     public Validator()
     {

@@ -1,7 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using ProjectManagement.Api.Features.Projects.GetExecutors;
 using ProjectManagement.Api.Features.Shared;
 
 namespace ProjectManagement.Api.Features.Projects.GetWorkTasks;

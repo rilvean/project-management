@@ -1,3 +1,3 @@
 namespace ProjectManagement.Api.Features.WorkTasks.AssignExecutor;
 
-record AssignWorkTaskExecutorRequest(Guid ExecutorId);
+public sealed record AssignWorkTaskExecutorRequest(Guid ExecutorId);

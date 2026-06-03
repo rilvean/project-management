@@ -3,7 +3,7 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Users.ChangeRole;
 
-public class Handler(WriteDbContext db)
+public sealed class Handler(WriteDbContext db)
     : IRequestHandler<ChangeRoleCommand>
 {
     public async Task Handle(ChangeRoleCommand request, CancellationToken ct)

@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace ProjectManagement.Api.Features.Projects.GetPage;
 
-public class Validator :  AbstractValidator<GetProjectsPageQuery>
+public sealed class Validator : AbstractValidator<GetProjectsPageQuery>
 {
     public Validator()
     {

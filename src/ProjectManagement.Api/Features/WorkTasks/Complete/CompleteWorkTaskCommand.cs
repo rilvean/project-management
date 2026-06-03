@@ -2,7 +2,7 @@ using MediatR;
 
 namespace ProjectManagement.Api.Features.WorkTasks.Complete;
 
-public record CompleteWorkTaskCommand(
+public sealed record CompleteWorkTaskCommand(
     Guid WorkTaskId,
     Guid ActorId
 ) : IRequest;

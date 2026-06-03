@@ -5,7 +5,7 @@ using ProjectManagement.Infrastructure.Persistence.Extensions;
 
 namespace ProjectManagement.Infrastructure.Persistence.Configurations;
 
-public class WorkTaskConfiguration : IEntityTypeConfiguration<WorkTask>
+public sealed class WorkTaskConfiguration : IEntityTypeConfiguration<WorkTask>
 {
     public void Configure(EntityTypeBuilder<WorkTask> builder)
     {

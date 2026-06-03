@@ -4,7 +4,7 @@ using ProjectManagement.Domain.ValueObjects;
 
 namespace ProjectManagement.Domain.Models;
 
-public class User : IAuditable
+public sealed class User : IAuditable
 {
     public const int NameMaxLength = 50;
 

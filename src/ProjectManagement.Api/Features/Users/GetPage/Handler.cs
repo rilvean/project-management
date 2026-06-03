@@ -1,17 +1,14 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ProjectManagement.Api.Features.Shared;
-using ProjectManagement.Api.Shared;
 using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Users.GetPage;
 
-public class Handler(ReadDbContext db)
+public sealed class Handler(ReadDbContext db)
     : IRequestHandler<GetUsersPageQuery, PagedResponse<UserResponse>>
 {
-    public async Task<PagedResponse<UserResponse>> Handle(
-        GetUsersPageQuery request,
-        CancellationToken ct)
+    public async Task<PagedResponse<UserResponse>> Handle(GetUsersPageQuery request, CancellationToken ct)
     {
         var query = db.Users;
 

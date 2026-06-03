@@ -2,7 +2,7 @@ using MediatR;
 
 namespace ProjectManagement.Api.Features.Users.Rename;
 
-public record RenameUserCommand(
+public sealed record RenameUserCommand(
     Guid UserId,
     string Name
 ) : IRequest;

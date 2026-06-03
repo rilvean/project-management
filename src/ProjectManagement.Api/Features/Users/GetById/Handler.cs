@@ -1,7 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ProjectManagement.Api.Features.Shared;
-using ProjectManagement.Api.Shared;
 using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Users.GetById;

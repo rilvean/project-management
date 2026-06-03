@@ -1,3 +1,3 @@
 namespace ProjectManagement.Api.Features.WorkTasks.ChangeDeadline;
 
-public record ChangeWorkTaskDeadlineRequest(DateTime? Deadline);
+public sealed record ChangeWorkTaskDeadlineRequest(DateTime? Deadline);

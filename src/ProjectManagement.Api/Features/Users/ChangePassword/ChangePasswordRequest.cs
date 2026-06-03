@@ -1,3 +1,3 @@
 namespace ProjectManagement.Api.Features.Users.ChangePassword;
 
-public record ChangePasswordRequest(string Password);
+public sealed record ChangePasswordRequest(string Password);

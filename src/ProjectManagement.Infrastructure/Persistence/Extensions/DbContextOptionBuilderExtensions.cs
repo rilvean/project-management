@@ -34,7 +34,7 @@ static class DbContextOptionBuilderExtensions
     {
         if (options is DbContextOptionsBuilder o)
             o.ConfigureNpgsql(connectionString, interceptor);
-        
+
         return options;
     }
 }

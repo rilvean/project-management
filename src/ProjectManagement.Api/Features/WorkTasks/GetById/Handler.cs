@@ -1,13 +1,11 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using ProjectManagement.Api.Features.Projects.GetById;
-using ProjectManagement.Api.Features.Projects.Shared;
 using ProjectManagement.Api.Features.Shared;
 using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.WorkTasks.GetById;
 
-public class Handler(ReadDbContext db)
+public sealed class Handler(ReadDbContext db)
     : IRequestHandler<GetWorkTaskByIdQuery, WorkTaskResponse>
 {
     public async Task<WorkTaskResponse> Handle(GetWorkTaskByIdQuery request, CancellationToken ct)

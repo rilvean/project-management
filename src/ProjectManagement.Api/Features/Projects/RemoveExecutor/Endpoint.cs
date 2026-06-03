@@ -2,7 +2,6 @@ using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using ProjectManagement.Api.Features.Projects.AddExecutor;
 
 namespace ProjectManagement.Api.Features.Projects.RemoveExecutor;
 

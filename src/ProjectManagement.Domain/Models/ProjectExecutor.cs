@@ -1,6 +1,6 @@
 namespace ProjectManagement.Domain.Models;
 
-public class ProjectExecutor
+public sealed class ProjectExecutor
 {
     public Guid ProjectId { get; private init; }
     public Guid UserId { get; private init; }

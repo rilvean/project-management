@@ -7,7 +7,7 @@ using ProjectManagement.Domain.Models;
 
 namespace ProjectManagement.Api.Services;
 
-public class JwtProvider(IOptions<JwtSettings> options)
+public sealed class JwtProvider(IOptions<JwtSettings> options)
 {
     public string Generate(User user)
     {

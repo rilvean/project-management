@@ -3,5 +3,5 @@ using ProjectManagement.Api.Features.Shared;
 
 namespace ProjectManagement.Api.Features.Projects.GetWorkTasks;
 
-public record GetProjectWorkTasksQuery(Guid ProjectId)
+public sealed record GetProjectWorkTasksQuery(Guid ProjectId)
     : IRequest<List<WorkTaskResponse>>;

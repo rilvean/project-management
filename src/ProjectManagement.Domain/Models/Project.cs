@@ -4,7 +4,7 @@ using ProjectManagement.Domain.Interfaces;
 
 namespace ProjectManagement.Domain.Models;
 
-public class Project : IAuditable
+public sealed class Project : IAuditable
 {
     public const int MaxTitleLength = 400;
     public const int MaxDescriptionLength = 2000;
@@ -198,7 +198,7 @@ public class Project : IAuditable
     private WorkTask GetWorkTask(Guid workTaskId)
     {
         return _workTasks.FirstOrDefault(x => x.Id == workTaskId)
-               ?? throw new DomainRuleException("This task is not in the project.");
+            ?? throw new DomainRuleException("This task is not in the project.");
     }
 
     private void EnsureEditable()
