@@ -12,6 +12,7 @@ public sealed class Handler(ReadDbContext db)
     {
         return db.WorkTasks
             .Where(x => x.ExecutorId == request.EmployeeId)
+            .OrderBy(x => x.Id)
             .Select(x => new WorkTaskResponse(
                 x.Id,
                 x.ProjectId,

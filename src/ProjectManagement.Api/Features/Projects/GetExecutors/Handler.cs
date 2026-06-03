@@ -29,6 +29,7 @@ public sealed class Handler(ReadDbContext db)
                     u.Role
                 )
             )
+            .OrderBy(x => x.Id)
             .ToListAsync(ct);
     }
 }

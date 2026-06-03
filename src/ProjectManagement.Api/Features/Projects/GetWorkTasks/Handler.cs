@@ -18,6 +18,7 @@ public sealed class Handler(ReadDbContext db)
 
         return await db.WorkTasks
             .Where(x => x.ProjectId == request.ProjectId)
+            .OrderBy(x => x.Id)
             .Select(x => new WorkTaskResponse(
                 x.Id,
                 x.ProjectId,
