@@ -1,7 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ProjectManagement.Domain.Enums;
 using ProjectManagement.Infrastructure.Persistence.Interceptors;
 
 namespace ProjectManagement.Infrastructure.Persistence.Extensions;
@@ -18,21 +16,14 @@ public static class DependencyInjection
 
         services.AddScoped<AuditInterceptor>();
 
-        services.AddDbContext<ProjectManagementDbContext>((sp, options) =>
-        {
-            options
-                .UseNpgsql(
-                    connectionString,
-                    o =>
-                    {
-                        o.MapEnum<UserRole>();
-                        o.MapEnum<WorkTaskStatus>();
-                        o.MapEnum<ProjectPriority>();
-                        o.MapEnum<ProjectStatus>();
-                    })
-                .UseSnakeCaseNamingConvention()
-                .AddInterceptors(sp.GetRequiredService<AuditInterceptor>());
-        });
+        services.AddDbContext<WriteDbContext>((sp, options) =>
+            options.ConfigureNpgsql(connectionString,
+                sp.GetRequiredService<AuditInterceptor>())
+        );
+
+        services.AddDbContext<ReadDbContext>(options =>
+            options.ConfigureNpgsql(connectionString)
+        );
 
         return services;
     }

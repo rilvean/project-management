@@ -1,35 +1,24 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using ProjectManagement.Domain.Enums;
+using ProjectManagement.Infrastructure.Persistence.Extensions;
 using ProjectManagement.Infrastructure.Persistence.Interceptors;
 
 namespace ProjectManagement.Infrastructure.Persistence;
 
-public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ProjectManagementDbContext>
+public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<WriteDbContext>
 {
-    public ProjectManagementDbContext CreateDbContext(string[] args)
+    public WriteDbContext CreateDbContext(string[] args)
     {
         var connectionString =
             "Host=localhost;"
             + "Database=project_management;"
             + "Username=postgres;Password=postgres;";
 
-        var options =
-            new DbContextOptionsBuilder<ProjectManagementDbContext>()
-                .UseNpgsql(
-                    connectionString,
-                    o =>
-                    {
-                        o.MapEnum<UserRole>();
-                        o.MapEnum<WorkTaskStatus>();
-                        o.MapEnum<ProjectPriority>();
-                        o.MapEnum<ProjectStatus>();
-                    }
-                )
-                .UseSnakeCaseNamingConvention()
-                .AddInterceptors(new AuditInterceptor())
-                .Options;
+        var options = new DbContextOptionsBuilder<WriteDbContext>()
+            .ConfigureNpgsql(connectionString)
+            .Options;
 
-        return new ProjectManagementDbContext(options);
+        return new WriteDbContext(options);
     }
 }
