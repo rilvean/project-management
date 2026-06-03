@@ -15,9 +15,9 @@ public class Handler(ProjectManagementDbContext db)
     {
         var query = db.Projects.AsNoTracking();
 
-        var total = await query.CountAsync(ct);
+        var total = query.CountAsync(ct);
 
-        var items = await query
+        var items = query
             .OrderBy(x => x.Id)
             .Skip((request.Page - 1) * request.PageSize)
             .Take(request.PageSize)
@@ -32,8 +32,8 @@ public class Handler(ProjectManagementDbContext db)
             .ToListAsync(ct);
 
         return new PagedResponse<ProjectResponse>(
-            items,
-            total,
+            await items,
+            await total,
             request.Page,
             request.PageSize
         );
