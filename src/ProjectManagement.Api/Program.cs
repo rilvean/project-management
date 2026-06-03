@@ -1,11 +1,14 @@
 using System.Text.Json.Serialization;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using ProjectManagement.Api.Extensions;
 using ProjectManagement.Api.Features;
 using ProjectManagement.Api.Services;
 using ProjectManagement.Api.Shared;
+using ProjectManagement.Infrastructure.Persistence;
 using ProjectManagement.Infrastructure.Persistence.Extensions;
+using ProjectManagement.Infrastructure.Persistence.Shared;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,9 +29,17 @@ builder.Services.AddTransient(
 builder.Services.ConfigureHttpJsonOptions(options =>
     options.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
+builder.Services.AddScoped<IDataSeeder, AdminSeeder>();
+
 var app = builder.Build();
 
 app.UseExceptionHandler();
+
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<IDataSeeder>();
+    await seeder.SeedAsync();
+}
 
 if (app.Environment.IsDevelopment())
 {
