@@ -2,6 +2,7 @@ using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using ProjectManagement.Api.Shared;
 
 namespace ProjectManagement.Api.Features.WorkTasks.Complete;
 
@@ -9,7 +10,9 @@ public static class Endpoint
 {
     public static RouteGroupBuilder MapCompleteWorkTask(this RouteGroupBuilder group)
     {
-        group.MapPost("{id:guid}/complete", Handle);
+        group.MapPost("{id:guid}/complete", Handle)
+            .RequireAuthorization(AuthorizationPolicies.CanCompleteTasks);
+
         return group;
     }
 

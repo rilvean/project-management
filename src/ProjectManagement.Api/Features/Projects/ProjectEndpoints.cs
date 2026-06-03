@@ -12,6 +12,7 @@ using ProjectManagement.Api.Features.Projects.GetWorkTasks;
 using ProjectManagement.Api.Features.Projects.RemoveExecutor;
 using ProjectManagement.Api.Features.Projects.Rename;
 using ProjectManagement.Api.Features.Projects.UnassignManager;
+using ProjectManagement.Api.Shared;
 
 namespace ProjectManagement.Api.Features.Projects;
 
@@ -19,7 +20,8 @@ public static class ProjectEndpoints
 {
     public static IEndpointRouteBuilder MapProjectEndpoints(this IEndpointRouteBuilder app)
     {
-        var group = app.MapGroup("/projects").WithTags("Projects");
+        var group = app.MapGroup("/projects").WithTags("Projects")
+            .RequireAuthorization(AuthorizationPolicies.ProjectManagerOrSupervisor);
 
         group.MapGetProjectById();
         group.MapGetProjectsPage();

@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using ProjectManagement.Api.Shared;
 
 namespace ProjectManagement.Api.Features.Projects.Create;
 
@@ -8,7 +9,9 @@ public static class Endpoint
 {
     public static RouteGroupBuilder MapCreateProject(this RouteGroupBuilder group)
     {
-        group.MapPost(string.Empty, Handle);
+        group.MapPost(string.Empty, Handle)
+            .RequireAuthorization(AuthorizationPolicies.SupervisorOnly);
+
         return group;
     }
 

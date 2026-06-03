@@ -38,10 +38,23 @@ public static class AuthenticationExtensions
 
         services.AddAuthorization(options =>
         {
-            foreach (var role in Enum.GetNames<UserRole>())
-            {
-                options.AddPolicy(role, policy => policy.RequireRole(role));
-            }
+            options.AddPolicy(AuthorizationPolicies.ProjectManagerOrSupervisor,
+                policy => policy.RequireRole(nameof(UserRole.ProjectManager), nameof(UserRole.Supervisor))
+            );
+
+            options.AddPolicy(AuthorizationPolicies.CanCompleteTasks,
+                policy => policy.RequireRole(
+                    nameof(UserRole.Employee),
+                    nameof(UserRole.ProjectManager),
+                    nameof(UserRole.Supervisor))
+            );
+            options.AddPolicy(AuthorizationPolicies.AdminOrSupervisor,
+                policy => policy.RequireRole(nameof(UserRole.Admin), nameof(UserRole.Supervisor))
+            );
+
+            options.AddPolicy(AuthorizationPolicies.SupervisorOnly,
+                policy => policy.RequireRole(nameof(UserRole.Supervisor))
+            );
         });
 
         return services;

@@ -2,6 +2,7 @@ using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using ProjectManagement.Api.Shared;
 
 namespace ProjectManagement.Api.Features.Projects.Delete;
 
@@ -9,7 +10,9 @@ public static class Endpoint
 {
     public static RouteGroupBuilder MapDeleteProject(this RouteGroupBuilder group)
     {
-        group.MapDelete("{id:guid}", Handle);
+        group.MapDelete("{id:guid}", Handle)
+            .RequireAuthorization(AuthorizationPolicies.SupervisorOnly);
+
         return group;
     }
 
