@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ProjectManagement.Domain.Models;
-using ProjectManagement.Infrastructure.Persistence.Extensions;
 
 namespace ProjectManagement.Infrastructure.Persistence.Configurations;
 
@@ -43,7 +42,5 @@ public sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
 
         builder.HasIndex(x => new { x.ManagerId, x.Title })
             .IsUnique();
-
-        builder.AddAudit();
     }
 }

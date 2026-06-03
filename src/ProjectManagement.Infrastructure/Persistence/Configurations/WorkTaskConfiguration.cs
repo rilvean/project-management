@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ProjectManagement.Domain.Models;
-using ProjectManagement.Infrastructure.Persistence.Extensions;
 
 namespace ProjectManagement.Infrastructure.Persistence.Configurations;
 
@@ -45,7 +44,5 @@ public sealed class WorkTaskConfiguration : IEntityTypeConfiguration<WorkTask>
             .IsUnique();
 
         builder.HasIndex(x => x.ExecutorId);
-
-        builder.AddAudit();
     }
 }

@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ProjectManagement.Domain.Models;
 using ProjectManagement.Domain.ValueObjects;
-using ProjectManagement.Infrastructure.Persistence.Extensions;
 
 namespace ProjectManagement.Infrastructure.Persistence.Configurations;
 
@@ -34,7 +33,5 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.HasIndex(x => x.Email)
             .IsUnique();
-
-        builder.AddAudit();
     }
 }

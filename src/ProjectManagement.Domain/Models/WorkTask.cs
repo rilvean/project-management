@@ -1,10 +1,9 @@
 using ProjectManagement.Domain.Enums;
 using ProjectManagement.Domain.Exceptions;
-using ProjectManagement.Domain.Interfaces;
 
 namespace ProjectManagement.Domain.Models;
 
-public sealed class WorkTask : IAuditable
+public sealed class WorkTask
 {
     public const int MaxTitleLength = 400;
     public const int MaxDescriptionLength = 2000;

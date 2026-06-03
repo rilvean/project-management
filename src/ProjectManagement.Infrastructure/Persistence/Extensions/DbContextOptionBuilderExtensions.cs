@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using ProjectManagement.Domain.Enums;
-using ProjectManagement.Infrastructure.Persistence.Interceptors;
 
 namespace ProjectManagement.Infrastructure.Persistence.Extensions;
 
@@ -8,8 +7,7 @@ static class DbContextOptionBuilderExtensions
 {
     public static DbContextOptionsBuilder ConfigureNpgsql(
         this DbContextOptionsBuilder options,
-        string connectionString,
-        AuditInterceptor? interceptor = null)
+        string connectionString)
     {
         options.UseNpgsql(
                 connectionString,
@@ -20,20 +18,18 @@ static class DbContextOptionBuilderExtensions
                     o.MapEnum<ProjectPriority>();
                     o.MapEnum<ProjectStatus>();
                 })
-            .UseSnakeCaseNamingConvention()
-            .AddInterceptors(interceptor ?? new AuditInterceptor());
+            .UseSnakeCaseNamingConvention();
 
         return options;
     }
 
     public static DbContextOptionsBuilder<T> ConfigureNpgsql<T>(
         this DbContextOptionsBuilder<T> options,
-        string connectionString,
-        AuditInterceptor? interceptor = null)
+        string connectionString)
         where T : DbContext
     {
         if (options is DbContextOptionsBuilder o)
-            o.ConfigureNpgsql(connectionString, interceptor);
+            o.ConfigureNpgsql(connectionString);
 
         return options;
     }

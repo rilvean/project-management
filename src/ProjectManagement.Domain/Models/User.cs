@@ -1,10 +1,9 @@
 using ProjectManagement.Domain.Enums;
-using ProjectManagement.Domain.Interfaces;
 using ProjectManagement.Domain.ValueObjects;
 
 namespace ProjectManagement.Domain.Models;
 
-public sealed class User : IAuditable
+public sealed class User
 {
     public const int NameMaxLength = 50;
 
