@@ -77,10 +77,10 @@ public class ProjectTests
     }
 
     [Fact]
-    public void ChangeTitle_Should_Throw_When_Completed()
+    public void Rename_Should_Throw_When_Completed()
     {
         var project = ProjectTestData.CreateCompletedProject();
 
-        Assert.Throws<DomainRuleException>(() => project.ChangeTitle("new"));
+        Assert.Throws<DomainRuleException>(() => project.Rename("new"));
     }
 }

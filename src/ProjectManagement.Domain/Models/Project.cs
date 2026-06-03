@@ -65,7 +65,7 @@ public class Project : IAuditable
     public IReadOnlyCollection<ProjectExecutor> Executors => _executors;
 
 
-    public void ChangeTitle(string newTitle)
+    public void Rename(string newTitle)
     {
         EnsureEditable();
         Title = newTitle;
