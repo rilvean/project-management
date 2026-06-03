@@ -14,10 +14,12 @@ public class ProjectExecutorConfiguration : IEntityTypeConfiguration<ProjectExec
 
         builder.HasOne<Project>()
             .WithMany(x => x.Executors)
-            .HasForeignKey(x => x.ProjectId);
+            .HasForeignKey(x => x.ProjectId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne<User>()
             .WithMany()
-            .HasForeignKey(x => x.UserId);
+            .HasForeignKey(x => x.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

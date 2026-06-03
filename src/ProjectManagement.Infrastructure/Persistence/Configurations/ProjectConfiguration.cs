@@ -13,9 +13,6 @@ public class ProjectConfiguration : IEntityTypeConfiguration<Project>
 
         builder.HasKey(x => x.Id);
 
-        builder.Property(x => x.ManagerId)
-            .IsRequired(false);
-
         builder.Property(x => x.Title)
             .HasMaxLength(Project.MaxTitleLength)
             .IsRequired();
@@ -29,6 +26,12 @@ public class ProjectConfiguration : IEntityTypeConfiguration<Project>
 
         builder.Property(x => x.Status)
             .IsRequired();
+
+        builder.HasOne<User>()
+            .WithMany()
+            .HasForeignKey(x => x.ManagerId)
+            .OnDelete(DeleteBehavior.SetNull)
+            .IsRequired(false);
 
         builder.Navigation(x => x.WorkTasks)
             .HasField("_workTasks")
