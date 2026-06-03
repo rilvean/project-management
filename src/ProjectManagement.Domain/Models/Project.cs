@@ -171,7 +171,7 @@ public class Project : IAuditable
         workTask.Rename(newTitle);
     }
 
-    public void ChangeWorkTaskDescription(Guid workTaskId, string newDescription)
+    public void ChangeWorkTaskDescription(Guid workTaskId, string? newDescription)
     {
         EnsureEditable();
 
