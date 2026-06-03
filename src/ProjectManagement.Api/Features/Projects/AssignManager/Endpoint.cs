@@ -2,29 +2,25 @@ using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using ProjectManagement.Api.Features.Projects.Complete;
 
-namespace ProjectManagement.Api.Features.Projects.Delete;
+namespace ProjectManagement.Api.Features.Projects.AssignManager;
 
 public static class Endpoint
 {
-    public static RouteGroupBuilder MapDeleteProject(this RouteGroupBuilder group)
+    public static RouteGroupBuilder MapAssignProjectManager(this RouteGroupBuilder group)
     {
-        group.MapDelete("{id:guid}", Handle);
+        group.MapPost("{id:guid}/assign-manager", Handle);
         return group;
     }
 
     private static async Task<Results<NoContent, UnauthorizedHttpResult>> Handle(
         [FromRoute] Guid id,
+        [FromBody] AssignProjectManagerRequest request,
         [FromServices] ISender sender,
-        HttpContext context,
         CancellationToken ct)
     {
-        if (!Guid.TryParse(context.User.FindFirstValue(ClaimTypes.NameIdentifier), out var actorId))
-        {
-            return TypedResults.Unauthorized();
-        }
-
-        var command = new DeleteProjectCommand(id, actorId);
+        var command = new AssignProjectManagerCommand(id, request.ManagerId);
         await sender.Send(command, ct);
         return TypedResults.NoContent();
     }

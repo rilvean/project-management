@@ -1,17 +1,18 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using ProjectManagement.Api.Features.Projects.ChangeDescription;
 using ProjectManagement.Domain.Services;
 using ProjectManagement.Infrastructure.Persistence;
 
-namespace ProjectManagement.Api.Features.Projects.CreateWorkTask;
+namespace ProjectManagement.Api.Features.Projects.Rename;
 
 public class Handler(WriteDbContext db)
-    : IRequestHandler<CreateWorkTaskCommand, CreateWorkTaskResponse>
+    : IRequestHandler<RenameProjectCommand>
 {
-    public async Task<CreateWorkTaskResponse> Handle(CreateWorkTaskCommand request, CancellationToken ct)
+    public async Task Handle(RenameProjectCommand request, CancellationToken ct)
     {
         var project = await db.Projects
-            .Where(p => p.Id == request.ProjectId)
+            .Where(x => x.Id == request.ProjectId)
             .FirstOrDefaultAsync(ct);
 
         if (project is null)
@@ -22,14 +23,8 @@ public class Handler(WriteDbContext db)
             throw new("User do not have permission to edit this project");
         }
 
-        var workTask = project.CreateWorkTask(
-            request.Title,
-            request.Description,
-            request.Deadline
-        );
+        project.Rename(request.Title);
 
         await db.SaveChangesAsync(ct);
-
-        return new CreateWorkTaskResponse(workTask.Id);
     }
 }

@@ -2,14 +2,15 @@ using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using ProjectManagement.Api.Features.WorkTasks.Complete;
 
-namespace ProjectManagement.Api.Features.Projects.Delete;
+namespace ProjectManagement.Api.Features.Projects.Complete;
 
 public static class Endpoint
 {
-    public static RouteGroupBuilder MapDeleteProject(this RouteGroupBuilder group)
+    public static RouteGroupBuilder MapCompleteProject(this RouteGroupBuilder group)
     {
-        group.MapDelete("{id:guid}", Handle);
+        group.MapPost("{id:guid}/complete", Handle);
         return group;
     }
 
@@ -24,7 +25,7 @@ public static class Endpoint
             return TypedResults.Unauthorized();
         }
 
-        var command = new DeleteProjectCommand(id, actorId);
+        var command = new CompleteProjectCommand(id, actorId);
         await sender.Send(command, ct);
         return TypedResults.NoContent();
     }

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -12,17 +13,24 @@ public static class Endpoint
         return group;
     }
 
-    private static async Task<Ok<CreateWorkTaskResponse>> Handle(
+    private static async Task<Results<Ok<CreateWorkTaskResponse>, UnauthorizedHttpResult>> Handle(
         [FromRoute] Guid id,
         [FromBody] CreateWorkTaskRequest request,
         [FromServices] ISender sender,
+        HttpContext context,
         CancellationToken ct)
     {
+        if (!Guid.TryParse(context.User.FindFirstValue(ClaimTypes.NameIdentifier), out var actorId))
+        {
+            return TypedResults.Unauthorized();
+        }
+
         var command = new CreateWorkTaskCommand(
             id,
             request.Title,
             request.Description,
-            request.Deadline
+            request.Deadline,
+            actorId
         );
         var response = await sender.Send(command);
         return TypedResults.Ok(response);

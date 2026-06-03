@@ -6,5 +6,6 @@ public record CreateWorkTaskCommand(
     Guid ProjectId,
     string Title,
     string? Description,
-    DateTime? Deadline
+    DateTime? Deadline,
+    Guid ActorId
 ) : IRequest<CreateWorkTaskResponse>;
