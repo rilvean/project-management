@@ -184,7 +184,7 @@ public class Project : IAuditable
         EnsureEditable();
 
         var workTask = GetWorkTask(workTaskId);
-        workTask.SetDeadline(deadline);
+        workTask.ChangeDeadline(deadline);
     }
 
     public void CompleteWorkTask(Guid workTaskId)

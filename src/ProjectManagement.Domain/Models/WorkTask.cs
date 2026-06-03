@@ -76,7 +76,7 @@ public class WorkTask : IAuditable
     public static WorkTask Create(Guid projectId, string title, string? description, DateTime? deadline)
     {
         var workTask = new WorkTask(projectId, title, description);
-        workTask.SetDeadline(deadline);
+        workTask.ChangeDeadline(deadline);
         return workTask;
     }
 
@@ -99,7 +99,7 @@ public class WorkTask : IAuditable
         Description = newDescription;
     }
 
-    internal void SetDeadline(DateTime? deadline)
+    internal void ChangeDeadline(DateTime? deadline)
     {
         EnsureEditable();
         Deadline = deadline;

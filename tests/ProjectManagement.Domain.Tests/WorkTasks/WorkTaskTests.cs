@@ -49,7 +49,7 @@ public class WorkTaskTests
         var task = CreateTask();
 
         Assert.Throws<ArgumentOutOfRangeException>(() =>
-            task.SetDeadline(DateTime.UtcNow.AddDays(-1))
+            task.ChangeDeadline(DateTime.UtcNow.AddDays(-1))
         );
     }
 
