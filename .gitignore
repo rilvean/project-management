@@ -481,9 +481,5 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 
-# My files
-script
-CLAUDE.md
-
 # Migrations
-[Mm]igrations/
+#[Mm]igrations/
