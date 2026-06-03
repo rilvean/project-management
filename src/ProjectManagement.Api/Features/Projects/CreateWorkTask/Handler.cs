@@ -3,7 +3,7 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Projects.CreateWorkTask;
 
-public class Handler(ProjectManagementDbContext db)
+public class Handler(WriteDbContext db)
     : IRequestHandler<CreateWorkTaskCommand, CreateWorkTaskResponse>
 {
     public async Task<CreateWorkTaskResponse> Handle(CreateWorkTaskCommand request, CancellationToken ct)

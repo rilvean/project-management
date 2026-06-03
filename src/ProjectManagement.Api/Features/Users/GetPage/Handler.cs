@@ -6,14 +6,14 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Users.GetPage;
 
-public class Handler(ProjectManagementDbContext db)
+public class Handler(ReadDbContext db)
     : IRequestHandler<GetUsersPageQuery, PagedResponse<UserResponse>>
 {
     public async Task<PagedResponse<UserResponse>> Handle(
         GetUsersPageQuery request,
         CancellationToken ct)
     {
-        var query = db.Users.AsNoTracking();
+        var query = db.Users;
 
         var total = query.CountAsync(ct);
 
@@ -24,7 +24,7 @@ public class Handler(ProjectManagementDbContext db)
             .Select(x => new UserResponse(
                 x.Id,
                 x.Name,
-                x.Email.Value,
+                x.Email,
                 x.Role
             ))
             .ToListAsync(ct);

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ProjectManagement.Infrastructure.Persistence.Extensions;
 
-public static class AuditConfigurationExtensions
+static class AuditConfigurationExtensions
 {
     public static void AddAudit<TEntity>(this EntityTypeBuilder<TEntity> builder)
         where TEntity : class

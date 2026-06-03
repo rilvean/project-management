@@ -6,14 +6,14 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Projects.GetPage;
 
-public class Handler(ProjectManagementDbContext db)
+public class Handler(ReadDbContext db)
     : IRequestHandler<GetProjectsPageQuery, PagedResponse<ProjectResponse>>
 {
     public async Task<PagedResponse<ProjectResponse>> Handle(
         GetProjectsPageQuery request,
         CancellationToken ct)
     {
-        var query = db.Projects.AsNoTracking();
+        var query = db.Projects;
 
         var total = query.CountAsync(ct);
 

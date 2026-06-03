@@ -5,7 +5,7 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Projects.GetWorkTasks;
 
-public class Handler(ProjectManagementDbContext db)
+public class Handler(ReadDbContext db)
     : IRequestHandler<GetProjectWorkTasksQuery, List<WorkTaskResponse>>
 {
     public async Task<List<WorkTaskResponse>> Handle(GetProjectWorkTasksQuery request, CancellationToken ct)
@@ -16,10 +16,8 @@ public class Handler(ProjectManagementDbContext db)
         if (!projectExists)
             throw new("Project not found");
 
-        return await db.Projects
-            .AsNoTracking()
-            .Where(x => x.Id == request.ProjectId)
-            .SelectMany(x => x.WorkTasks)
+        return await db.WorkTasks
+            .Where(x => x.ProjectId == request.ProjectId)
             .Select(x => new WorkTaskResponse(
                 x.Id,
                 x.ProjectId,

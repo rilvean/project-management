@@ -7,15 +7,13 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.WorkTasks.GetById;
 
-public class Handler(ProjectManagementDbContext db)
+public class Handler(ReadDbContext db)
     : IRequestHandler<GetWorkTaskByIdQuery, WorkTaskResponse>
 {
     public async Task<WorkTaskResponse> Handle(GetWorkTaskByIdQuery request, CancellationToken ct)
     {
-        var workTask = await db.Projects
-            .AsNoTracking()
-            .Where(p => p.Id == request.WorkTaskId)
-            .SelectMany(x => x.WorkTasks)
+        var workTask = await db.WorkTasks
+            .Where(x => x.Id == request.WorkTaskId)
             .Select(x => new WorkTaskResponse(
                 x.Id,
                 x.ProjectId,

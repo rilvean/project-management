@@ -3,7 +3,7 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Users.Rename;
 
-public sealed class Handler(ProjectManagementDbContext db)
+public sealed class Handler(WriteDbContext db)
     : IRequestHandler<RenameUserCommand>
 {
     public async Task Handle(RenameUserCommand request, CancellationToken ct)

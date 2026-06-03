@@ -6,7 +6,7 @@ using ProjectManagement.Infrastructure.Persistence;
 namespace ProjectManagement.Api.Features.Auth.Login;
 
 public sealed class Handler(
-    ProjectManagementDbContext db,
+    WriteDbContext db,
     JwtProvider jwtProvider)
     : IRequestHandler<LoginCommand, LoginResponse>
 {

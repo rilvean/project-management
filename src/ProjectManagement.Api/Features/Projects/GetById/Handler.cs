@@ -5,13 +5,12 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Projects.GetById;
 
-public class Handler(ProjectManagementDbContext db)
+public class Handler(ReadDbContext db)
     : IRequestHandler<GetProjectByIdQuery, ProjectResponse>
 {
     public async Task<ProjectResponse> Handle(GetProjectByIdQuery request, CancellationToken ct)
     {
         var project = await db.Projects
-            .AsNoTracking()
             .Where(p => p.Id == request.ProjectId)
             .Select(x => new ProjectResponse(
                 x.Id,

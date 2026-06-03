@@ -5,7 +5,7 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Projects.GetExecutors;
 
-public class Handler(ProjectManagementDbContext db)
+public class Handler(ReadDbContext db)
     : IRequestHandler<GetExecutorsQuery, List<UserResponse>>
 {
     public async Task<List<UserResponse>> Handle(GetExecutorsQuery request, CancellationToken ct)
@@ -16,19 +16,17 @@ public class Handler(ProjectManagementDbContext db)
         if (!projectExists)
             throw new("Project not found");
 
-        return await db.Projects
-            .AsNoTracking()
-            .Where(x => x.Id == request.ProjectId)
-            .SelectMany(x => x.Executors)
+        return await db.ProjectExecutors
+            .Where(x => x.ProjectId == request.ProjectId)
             .Join(
                 db.Users,
-                executor => executor.UserId,
-                user => user.Id,
-                (executor, user) => new UserResponse(
-                    user.Id,
-                    user.Name,
-                    user.Email,
-                    user.Role
+                e => e.UserId,
+                u => u.Id,
+                (e, u) => new UserResponse(
+                    u.Id,
+                    u.Name,
+                    u.Email,
+                    u.Role
                 )
             )
             .ToListAsync(ct);

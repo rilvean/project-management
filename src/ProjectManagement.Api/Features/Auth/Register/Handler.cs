@@ -6,7 +6,7 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Auth.Register;
 
-public sealed class Handler(ProjectManagementDbContext db)
+public sealed class Handler(WriteDbContext db)
     : IRequestHandler<RegisterCommand, RegisterResponse>
 {
     public async Task<RegisterResponse> Handle(

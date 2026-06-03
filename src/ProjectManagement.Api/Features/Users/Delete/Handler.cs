@@ -4,7 +4,7 @@ using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Users.Delete;
 
-public class Handler(ProjectManagementDbContext db)
+public class Handler(WriteDbContext db)
     : IRequestHandler<DeleteUserCommand>
 {
     public async Task Handle(DeleteUserCommand request, CancellationToken ct)
