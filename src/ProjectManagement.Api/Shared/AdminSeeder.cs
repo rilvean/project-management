@@ -3,7 +3,6 @@ using ProjectManagement.Domain.Enums;
 using ProjectManagement.Domain.Models;
 using ProjectManagement.Domain.ValueObjects;
 using ProjectManagement.Infrastructure.Persistence;
-using ProjectManagement.Infrastructure.Persistence.Shared;
 
 namespace ProjectManagement.Api.Shared;
 

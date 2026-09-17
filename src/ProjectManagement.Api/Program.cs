@@ -6,7 +6,6 @@ using ProjectManagement.Api.Features;
 using ProjectManagement.Api.Services;
 using ProjectManagement.Api.Shared;
 using ProjectManagement.Infrastructure.Persistence.Extensions;
-using ProjectManagement.Infrastructure.Persistence.Shared;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -4,7 +4,7 @@ using ProjectManagement.Domain.Enums;
 
 #nullable disable
 
-namespace ProjectManagement.Infrastructure.Migrations
+namespace ProjectManagement.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration
