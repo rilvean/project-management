@@ -12,11 +12,18 @@ public static class AuthenticationExtensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.Configure<JwtSettings>(configuration.GetSection(nameof(JwtSettings)));
+        services.AddOptions<JwtSettings>()
+            .BindConfiguration(nameof(JwtSettings))
+            .ValidateDataAnnotations()
+            .Validate(x => x.Expires > TimeSpan.Zero,
+                "Expires must be greater than zero.")
+            .ValidateOnStart();
         services.AddSingleton<JwtProvider>();
 
-        var jwtSettings = configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>();
-        if (jwtSettings == null) throw new ArgumentNullException(nameof(jwtSettings));
+        var jwtSettings = configuration
+                .GetSection(nameof(JwtSettings))
+                .Get<JwtSettings>()
+            ?? throw new InvalidOperationException($"Configuration section '{nameof(JwtSettings)}' is missing.");
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
