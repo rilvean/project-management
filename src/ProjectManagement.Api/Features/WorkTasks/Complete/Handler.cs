@@ -1,6 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using ProjectManagement.Domain.Services;
+using ProjectManagement.Domain.Policies;
 using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.WorkTasks.Complete;
@@ -20,7 +20,7 @@ public sealed class Handler(WriteDbContext db)
         var actor = await db.Users.FindAsync([request.ActorId], ct)
             ?? throw new Exception("Actor not found");
 
-        if (!WorkTaskPolicies.CanComplete(project, request.WorkTaskId, actor))
+        if (!WorkTaskPolicy.CanComplete(project, request.WorkTaskId, actor))
         {
             throw new("User do not have permission to complete this task");
         }

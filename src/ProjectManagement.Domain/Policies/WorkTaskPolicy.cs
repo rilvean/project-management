@@ -1,9 +1,9 @@
 using ProjectManagement.Domain.Enums;
 using ProjectManagement.Domain.Models;
 
-namespace ProjectManagement.Domain.Services;
+namespace ProjectManagement.Domain.Policies;
 
-public static class WorkTaskPolicies
+public static class WorkTaskPolicy
 {
     public static bool CanComplete(Project project, Guid workTaskId, User user)
     {

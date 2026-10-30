@@ -1,9 +1,9 @@
 using ProjectManagement.Domain.Enums;
 using ProjectManagement.Domain.Models;
 
-namespace ProjectManagement.Domain.Services;
+namespace ProjectManagement.Domain.Policies;
 
-public static class ProjectPolicies
+public static class ProjectPolicy
 {
     public static bool CanEdit(Project project, User user)
     {

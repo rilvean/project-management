@@ -1,6 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using ProjectManagement.Domain.Services;
+using ProjectManagement.Domain.Policies;
 using ProjectManagement.Infrastructure.Persistence;
 
 namespace ProjectManagement.Api.Features.Projects.AddExecutor;
@@ -21,7 +21,7 @@ public sealed class Handler(WriteDbContext db)
         var actor = await db.Users.FindAsync([request.ActorId], ct)
             ?? throw new Exception("Actor not found");
 
-        if (!ProjectPolicies.CanEdit(project, actor))
+        if (!ProjectPolicy.CanEdit(project, actor))
         {
             throw new("User do not have permission to edit this project");
         }
