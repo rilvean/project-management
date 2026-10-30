@@ -60,8 +60,8 @@ public sealed class Project
     public ProjectPriority Priority { get; private set; } = ProjectPriority.Medium;
     public ProjectStatus Status { get; private set; } = ProjectStatus.Active;
 
-    public IReadOnlyCollection<WorkTask> WorkTasks => _workTasks;
-    public IReadOnlyCollection<ProjectExecutor> Executors => _executors;
+    public IReadOnlyCollection<WorkTask> WorkTasks => _workTasks.AsReadOnly();
+    public IReadOnlyCollection<ProjectExecutor> Executors => _executors.AsReadOnly();
 
 
     public void Rename(string newTitle)
