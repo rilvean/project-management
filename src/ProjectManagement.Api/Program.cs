@@ -1,10 +1,12 @@
 using System.Text.Json.Serialization;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using ProjectManagement.Api.Extensions;
 using ProjectManagement.Api.Features;
 using ProjectManagement.Api.Services;
 using ProjectManagement.Api.Shared;
+using ProjectManagement.Infrastructure.Persistence;
 using ProjectManagement.Infrastructure.Persistence.Extensions;
 using Scalar.AspNetCore;
 
@@ -30,12 +32,20 @@ builder.Services.AddScoped<IDataSeeder, AdminSeeder>();
 
 var app = builder.Build();
 
-app.UseExceptionHandler();
-
-using (var scope = app.Services.CreateScope())
+await using (var scope = app.Services.CreateAsyncScope())
 {
-    var seeder = scope.ServiceProvider.GetRequiredService<IDataSeeder>();
-    await seeder.SeedAsync();
+    var services = scope.ServiceProvider;
+
+    if (args.Contains("--migrate", StringComparer.OrdinalIgnoreCase))
+    {
+        var dbContext = services.GetRequiredService<WriteDbContext>();
+        await dbContext.Database.MigrateAsync();
+
+        var seeder = services.GetRequiredService<IDataSeeder>();
+        await seeder.SeedAsync();
+
+        return;
+    }
 }
 
 if (app.Environment.IsDevelopment())
@@ -44,6 +54,7 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 
+app.UseExceptionHandler();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

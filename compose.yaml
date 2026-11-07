@@ -1,0 +1,40 @@
+﻿services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: project_management
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d project_management" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  
+  migrate:
+    image: projectmanagement.api
+    build:
+      context: .
+      dockerfile: src/ProjectManagement.Api/Dockerfile
+    command: [ "--migrate" ]
+    environment:
+      ConnectionStrings__Default: "Host=db;Port=5432;Database=project_management;Username=postgres;Password=${POSTGRES_PASSWORD}"
+    depends_on:
+      db:
+        condition: service_healthy
+  
+  api:
+    image: projectmanagement.api
+    ports:
+      - "127.0.0.1:5000:5000"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__Default: "Host=db;Port=5432;Database=project_management;Username=postgres;Password=${POSTGRES_PASSWORD}"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+volumes:
+  postgres_data:
